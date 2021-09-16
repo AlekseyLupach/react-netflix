@@ -1,0 +1,2 @@
+(this["webpackJsonpadmin-dashboard"]=this["webpackJsonpadmin-dashboard"]||[]).push([[0],{9:function(e,n,t){"use strict";t.r(n);var a=t(1),r=t.n(a),s=t(3),c=t.n(s),d=t(0);var i=function(){return Object(d.jsx)("div",{className:"App",children:"hellow"})};c.a.render(Object(d.jsx)(r.a.StrictMode,{children:Object(d.jsx)(i,{})}),document.getElementById("root"))}},[[9,1,2]]]);
+//# sourceMappingURL=main.6c52c155.chunk.js.map
