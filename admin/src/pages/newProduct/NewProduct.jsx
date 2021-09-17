@@ -1,18 +1,17 @@
-import storage from "../../firebase";
 import { useContext, useState } from "react";
 import "./NewProduct.css";
 import { createMovie } from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
+import { ClipLoader } from "react-spinners";
+import upload from "../../upload.js";
 
 function NewProduct() {
   const [movie, setMovie] = useState(null);
   const [img, setImg] = useState(null);
   const [imgTitle, setImgTitle] = useState(null);
-  const [imgSm, setImgSm] = useState(null);
   const [trailer, setTrailer] = useState(null);
-  const [video, setVideo] = useState(null);
   const [uploaded, setUploaded] = useState(0);
-
+  const [progressBar, setProgressBar] = useState(null);
   const { dispatch } = useContext(MovieContext);
 
   const handleChange = (e) => {
@@ -20,41 +19,18 @@ function NewProduct() {
     setMovie({ ...movie, [e.target.name]: value });
   };
 
-  const upload = (items) => {
-    items.forEach((item) => {
-      const fileName = new Date().getTime() + item.label + item.file.name;
-      const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-        },
-        (error) => {
-          console.log(error);
-        },
-        () => {
-          uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-            setMovie((prev) => {
-              return { ...prev, [item.label]: url };
-            });
-            setUploaded((prev) => prev + 1);
-          });
-        }
-      );
-    });
-  };
-
   const handleUpload = (e) => {
     e.preventDefault();
-    upload([
-      { file: img, label: "img" },
-      { file: imgTitle, label: "imgTitle" },
-      { file: imgSm, label: "imgSm" },
-      { file: trailer, label: "trailer" },
-      { file: video, label: "video" },
-    ]);
+    upload(
+      [
+        { file: img, label: "img" },
+        { file: imgTitle, label: "imgTitle" },
+        { file: trailer, label: "trailer" },
+      ],
+      setMovie,
+      setUploaded,
+      setProgressBar
+    );
   };
 
   const handleSubmit = (e) => {
@@ -62,7 +38,6 @@ function NewProduct() {
     createMovie(movie, dispatch);
   };
 
-  console.log(movie);
   return (
     <div className="newProduct">
       <h1 className="addProductTitle">New Movie</h1>
@@ -86,12 +61,11 @@ function NewProduct() {
           />
         </div>
         <div className="addProductItem">
-          <label>Thumbnail image</label>
+          <label>Trailer</label>
           <input
             type="file"
-            id="imgSm"
-            name="imgSm"
-            onChange={(e) => setImgSm(e.target.files[0])}
+            name="trailer"
+            onChange={(e) => setTrailer(e.target.files[0])}
           />
         </div>
         <div className="addProductItem">
@@ -155,30 +129,13 @@ function NewProduct() {
             <option value="true">Yes</option>
           </select>
         </div>
-        <div className="addProductItem">
-          <label>Trailer</label>
-          <input
-            type="file"
-            name="trailer"
-            onChange={(e) => setTrailer(e.target.files[0])}
-          />
-        </div>
-        <div className="addProductItem">
-          <label>Video</label>
-          <input
-            type="file"
-            placeholder="Limit"
-            name="video"
-            onChange={(e) => setVideo(e.target.files[0])}
-          />
-        </div>
-        {uploaded === 5 ? (
+        {uploaded ? (
           <button className="addProductButton" onClick={handleSubmit}>
             Create
           </button>
         ) : (
           <button className="addProductButton" onClick={handleUpload}>
-            Upload
+            Upload<span> {progressBar ? <ClipLoader size="14" /> : ""}</span>
           </button>
         )}
       </form>

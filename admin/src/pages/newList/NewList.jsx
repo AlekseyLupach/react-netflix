@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./NewList.css";
-import { createMovie, getMovies } from "../../context/movieContext/apiCalls";
+import { getMovies } from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
 import { ListContext } from "../../context/listContext/ListContext";
 import { createList } from "../../context/listContext/apiCalls";
@@ -76,7 +76,7 @@ function NewList() {
             >
               {movies.map((movie) => (
                 <option value={movie._id} key={movie._id}>
-                  {movie.title}
+                  {movie.title}, ({movie.genre})
                 </option>
               ))}
             </select>

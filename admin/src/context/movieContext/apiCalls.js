@@ -8,6 +8,9 @@ import {
   getMoviesFAILURE,
   getMoviesStart,
   getMoviesSuccess,
+  updateMovieFAILURE,
+  updateMovieStart,
+  updateMovieSuccess,
 } from "./MovieActions";
 import axios from "axios";
 
@@ -51,7 +54,23 @@ export const createMovie = async (movie, dispatch) => {
       },
     });
     dispatch(createMovieSuccess(res.data));
+    res.data &&  window.location.replace("/movies/");
   } catch (err) {
     dispatch(createMovieFAILURE());
+  }
+};
+
+//UPDATE
+export const updateMovie = async (id, newMovie, dispatch) => {
+  dispatch(updateMovieStart());
+  try {
+    await axios.put("/movies/" + id, newMovie, {
+      headers: {
+        token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+      },
+    });
+    dispatch(updateMovieSuccess(id));
+  } catch (err) {
+    dispatch(updateMovieFAILURE());
   }
 };

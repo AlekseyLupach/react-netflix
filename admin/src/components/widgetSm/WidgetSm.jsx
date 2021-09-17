@@ -2,6 +2,7 @@ import "./widgetSm.css";
 import { Visibility } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function WidgetSm() {
   const [newUsers, SetNewUsers] = useState([]);
@@ -23,7 +24,6 @@ function WidgetSm() {
     getNewUsers();
   }, []);
 
-  console.log(newUsers);
   return (
     <div className="widgetSm">
       <span className="widgetSmTitle">New Join Members</span>
@@ -31,17 +31,30 @@ function WidgetSm() {
         {newUsers.map((user) => (
           <li className="widgetSmListItem" key={user._id}>
             <img
-              src={user.profilePic || "https://pbs.twimg.com/media/D8tCa48VsAA4lxn.jpg"}
+              src={
+                user.profilePic ||
+                "https://pbs.twimg.com/media/D8tCa48VsAA4lxn.jpg"
+              }
               alt=""
               className="widgetSmImg"
             />
             <div className="widgetSmUser">
               <span className="widgetSmUsername">{user.username}</span>
             </div>
-            <button className="widgetSmButton">
-              <Visibility className="widgetSmIcon" />
-              Display
-            </button>
+            <div className="widgetSmUser">
+              <span className="widgetSmUsername">{user.email}</span>
+            </div>
+            <div className="widgetSmUser">
+              <span className="widgetSmUsername">
+                {new Date(user.createdAt).toDateString()}
+              </span>
+            </div>
+            <Link to="/users/" className="link">
+              <button className="widgetSmButton">
+                <Visibility className="widgetSmIcon" />
+                Display
+              </button>
+            </Link>
           </li>
         ))}
       </ul>

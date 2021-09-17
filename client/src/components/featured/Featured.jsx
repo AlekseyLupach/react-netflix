@@ -22,7 +22,7 @@ function Featured({ type }) {
     };
     getRandomContent();
   }, [type]);
-
+  console.log(content)
   return (
     <div className="featured">
       {type && (
@@ -50,6 +50,16 @@ function Featured({ type }) {
       <img src={content.img} alt="" />
       <div className="info">
         <img src={content.imgTitle} alt="" />
+        <div className="infoContainer">
+        <h2 className="title">{content.title}</h2>
+          <span className="year">{content.year}</span>
+          <span role="presentation" class="info-spacer"> | </span>
+          <span className="limit">{content.limit}+</span>
+          <span role="presentation" class="info-spacer"> | </span>
+          <span className="duration">{content.duration}</span>
+          <span role="presentation" class="info-spacer"> | </span>
+          <span className="genre">{content.genre}</span>
+        </div>
         <span className="desc">{content.desc}</span>
         <div className="buttons">
           <button className="play">

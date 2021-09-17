@@ -4,8 +4,8 @@
 
 .addProductForm {
     margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
+    display   : flex;
+    flex-wrap : wrap;
 }
 
 .addProductItem {
@@ -13,7 +13,7 @@
     display       : flex;
     flex-direction: column;
     margin-bottom : 10px;
-    padding: 20px;
+    padding       : 20px;
 }
 
 .addProductItem>label {
@@ -35,11 +35,26 @@
     padding         : 7px 10px;
     border          : none;
     border-radius   : 10px;
-    background-color: darkblue;
+    background-color: teal;
     color           : white;
     font-weight     : 600;
     cursor          : pointer;
-    height: 40px;
-    width: 100px;
-    align-self: center;
+    height          : 40px;
+    width           : 100px;
+    align-self      : center;
+    align-items     : center;
+    display         : flex;
+    font-size       : 18px;
+    text-transform  : uppercase;
+}
+
+.addProductButton span {
+    display    : flex;
+    align-items: center;
+}
+
+.css-w3f7u9 {
+    margin-left        : 5px !important;
+    border-color       : white !important;
+    border-bottom-color: transparent !important;
 }
