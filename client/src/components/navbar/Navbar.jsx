@@ -1,11 +1,14 @@
 import "./navbar.scss";
 import { ArrowDropDown, Notifications, Search } from "@material-ui/icons";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../authContext/AuthContext";
+import { logout } from "../../authContext/AuthActions";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const { user, dispatch } = useContext(AuthContext);
+  console.log(user);
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
@@ -23,10 +26,10 @@ function Navbar() {
             <span>Home</span>
           </Link>
           <Link to="/series" className="link">
-            <span>Series</span>
+            <span className="navbarmainLinks">Series</span>
           </Link>
           <Link to="/movies" className="link">
-            <span>Movies</span>
+            <span className="navbarmainLinks">Movies</span>
           </Link>
           <Link className="link">
             <span>New and Popular</span>
@@ -40,14 +43,26 @@ function Navbar() {
           <span>KID</span>
           <Notifications className="icon" />
           <img
-            src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+            src={
+              user.profilePic ||
+              "https://pbs.twimg.com/media/D8tCa48VsAA4lxn.jpg"
+            }
             alt=""
           />
           <div className="profile">
             <ArrowDropDown className="icon" />
             <div className="options">
+              {user.isAdmin === true ? (
+                <span>
+                  <a href="http://localhost:4000/" className="link">
+                    Dashboard
+                  </a>
+                </span>
+              ) : (
+                ""
+              )}
               <span>Settings</span>
-              <span>Logout</span>
+              <span onClick={() => dispatch(logout())}>Logout</span>
             </div>
           </div>
         </div>

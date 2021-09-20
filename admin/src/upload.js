@@ -1,6 +1,6 @@
 import storage from "./firebase";
 
-export default function upload(items, setUpdate, setUploaded, setProgressBar) {
+export default function upload(items, setUpdate, setProgressBar) {
   items.forEach((item) => {
     const fileName = new Date().getTime() + item.label + item.file?.name;
     const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
@@ -20,7 +20,6 @@ export default function upload(items, setUpdate, setUploaded, setProgressBar) {
           setUpdate((prev) => {
             return { ...prev, [item.label]: url };
           });
-          setUploaded((prev) => prev + 1);
           setProgressBar(true)
         });
       }

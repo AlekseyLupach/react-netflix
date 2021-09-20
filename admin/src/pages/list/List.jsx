@@ -1,4 +1,4 @@
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import { ListContext } from "../../context/listContext/ListContext";
 import { updateList } from "../../context/listContext/apiCalls";
@@ -36,10 +36,7 @@ function List() {
   return (
     <div className="product">
       <div className="productTitleContainer">
-        <h1 className="productTitle">list</h1>
-        <Link to="/newlist">
-          <button className="productAddButton">Create</button>
-        </Link>
+        <h1 className="productTitle">Update list</h1>
       </div>
       <div className="productBottom">
         <form className="productForm">
@@ -82,7 +79,7 @@ function List() {
           </div>
           <div className="productFormRight">
             <button className="productButton" onClick={handleSubmit}>
-              Update
+              Save update
             </button>
           </div>
         </form>

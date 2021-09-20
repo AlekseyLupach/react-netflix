@@ -18,8 +18,7 @@ function Home({ type }) {
           }`,
           {
             headers: {
-              token:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNDFiYmUwY2VjOWIyMjVlOWIyYzcxOCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYzMTcwNDQzOSwiZXhwIjoxNjMyMTM2NDM5fQ.LHh11C3oXjEhkiZdfj4YCYgrSyTEl7siQYMNinbauRw",
+              token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
             },
           }
         );
@@ -34,7 +33,7 @@ function Home({ type }) {
   return (
     <div className="home">
       <Navbar />
-      <Featured type={type} />
+      <Featured type={type} setGenre={setGenre}/>
       {lists.map((list) => (
         <List list={list} />
       ))}

@@ -18,8 +18,7 @@ function ListItem({ index, item }) {
       try {
         const res = await axios.get("/movies/find/" + item, {
           headers: {
-            token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNDFiYmUwY2VjOWIyMjVlOWIyYzcxOCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYzMTcwNDQzOSwiZXhwIjoxNjMyMTM2NDM5fQ.LHh11C3oXjEhkiZdfj4YCYgrSyTEl7siQYMNinbauRw",
+            token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
           },
         });
         setMovie(res.data);
@@ -38,10 +37,10 @@ function ListItem({ index, item }) {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <img src={movie?.imgSm} alt="" />
+        <img src={movie?.imgList} alt="" />
         {isHovered && (
           <>
-            {/* <video src={movie.trailer} autoPlay={true} loop /> */}
+            <video src={movie.trailer} autoPlay={true} loop />
             <div className="itemInfo">
               <div className="icons">
                 <PlayArrow className="icon" />

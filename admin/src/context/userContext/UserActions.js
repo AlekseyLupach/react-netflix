@@ -8,6 +8,20 @@ export const getUsersSuccess = (users) => ({
 });
 
 export const getUsersFAILURE = () => ({
+  type: "GET_USER_FAILURE",
+});
+
+// GET USER
+export const getUserStart = () => ({
+  type: "GET_USER_START",
+});
+
+export const getUserSuccess = (user) => ({
+  type: "GET_USER_SUCCESS",
+  payload: user,
+});
+
+export const getUserFAILURE = () => ({
   type: "GET_USERS_FAILURE",
 });
 

@@ -2,9 +2,12 @@ import {
   deleteUserFAILURE,
   deleteUserStart,
   deleteUserSuccess,
+  getUserFAILURE,
   getUsersFAILURE,
   getUsersStart,
   getUsersSuccess,
+  getUserStart,
+  getUserSuccess,
   uploadUserFAILURE,
   uploadUserStart,
   uploadUserSuccess,
@@ -23,6 +26,21 @@ export const getUsers = async (dispatch) => {
     dispatch(getUsersSuccess(res.data));
   } catch (err) {
     dispatch(getUsersFAILURE());
+  }
+};
+
+//GET
+export const getUser = async (id, dispatch) => {
+  dispatch(getUserStart());
+  try {
+    const res = await axios.get("/users/find/" + id, {
+      headers: {
+        token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+      },
+    });
+    dispatch(getUserSuccess(res.data));
+  } catch (err) {
+    dispatch(getUserFAILURE());
   }
 };
 

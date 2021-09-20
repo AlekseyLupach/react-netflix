@@ -8,7 +8,7 @@ import { deleteMovies, getMovies } from "../../context/movieContext/apiCalls";
 
 function ProductList() {
   const { movies, dispatch } = useContext(MovieContext);
-
+  
   useEffect(() => {
     getMovies(dispatch);
   }, [dispatch]);

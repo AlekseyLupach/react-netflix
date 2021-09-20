@@ -9,6 +9,7 @@ function NewProduct() {
   const [movie, setMovie] = useState(null);
   const [img, setImg] = useState(null);
   const [imgTitle, setImgTitle] = useState(null);
+  const [imgList, setImgList] = useState(null);
   const [trailer, setTrailer] = useState(null);
   const [uploaded, setUploaded] = useState(0);
   const [progressBar, setProgressBar] = useState(null);
@@ -19,16 +20,36 @@ function NewProduct() {
     setMovie({ ...movie, [e.target.name]: value });
   };
 
+  const handleImg = (e) => {
+    setImg(e.target.files[0]);
+    setUploaded((prev) => prev + 1);
+  };
+
+  const handleImgTitle = (e) => {
+    setImgTitle(e.target.files[0]);
+    setUploaded((prev) => prev + 1);
+  };
+
+  const handleImgList = (e) => {
+    setImgList(e.target.files[0]);
+    setUploaded((prev) => prev + 1);
+  };
+
+  const handleImgTrailer = (e) => {
+    setTrailer(e.target.files[0]);
+    setUploaded((prev) => prev + 1);
+  };
+
   const handleUpload = (e) => {
     e.preventDefault();
     upload(
       [
         { file: img, label: "img" },
         { file: imgTitle, label: "imgTitle" },
+        { file: imgList, label: "imgList" },
         { file: trailer, label: "trailer" },
       ],
       setMovie,
-      setUploaded,
       setProgressBar
     );
   };
@@ -43,13 +64,8 @@ function NewProduct() {
       <h1 className="addProductTitle">New Movie</h1>
       <form className="addProductForm">
         <div className="addProductItem">
-          <label>Image</label>
-          <input
-            type="file"
-            id="img"
-            name="img"
-            onChange={(e) => setImg(e.target.files[0])}
-          />
+          <label>Background Image</label>
+          <input type="file" id="img" name="img" onChange={handleImg} />
         </div>
         <div className="addProductItem">
           <label>Title image</label>
@@ -57,7 +73,16 @@ function NewProduct() {
             type="file"
             id="imgTitle"
             name="imgTitle"
-            onChange={(e) => setImgTitle(e.target.files[0])}
+            onChange={handleImgTitle}
+          />
+        </div>
+        <div className="addProductItem">
+          <label>List image</label>
+          <input
+            type="file"
+            id="setImgBg"
+            name="setImgBg"
+            onChange={handleImgList}
           />
         </div>
         <div className="addProductItem">
@@ -65,7 +90,8 @@ function NewProduct() {
           <input
             type="file"
             name="trailer"
-            onChange={(e) => setTrailer(e.target.files[0])}
+            id="trailer"
+            onChange={handleImgTrailer}
           />
         </div>
         <div className="addProductItem">
@@ -97,12 +123,13 @@ function NewProduct() {
         </div>
         <div className="addProductItem">
           <label>Genre</label>
-          <input
-            type="text"
-            placeholder="Genre"
-            name="genre"
-            onChange={handleChange}
-          />
+          <select name="genre" id="genre" onChange={handleChange}>
+            <option>Select</option>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Crime">Crime</option>
+            <option value="Dramas">TV Dramas</option>
+          </select>
         </div>
         <div className="addProductItem">
           <label>Duration</label>
@@ -129,13 +156,13 @@ function NewProduct() {
             <option value="true">Yes</option>
           </select>
         </div>
-        {uploaded ? (
-          <button className="addProductButton" onClick={handleSubmit}>
-            Create
-          </button>
-        ) : (
+        {uploaded === 1 ? (
           <button className="addProductButton" onClick={handleUpload}>
             Upload<span> {progressBar ? <ClipLoader size="14" /> : ""}</span>
+          </button>
+        ) : (
+          <button className="addProductButton" onClick={handleSubmit}>
+            Create
           </button>
         )}
       </form>

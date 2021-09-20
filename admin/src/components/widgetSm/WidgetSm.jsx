@@ -12,8 +12,7 @@ function WidgetSm() {
       try {
         const res = await axios.get("/users?new=true", {
           headers: {
-            token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNDFiYmUwY2VjOWIyMjVlOWIyYzcxOCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYzMTY5ODE1MywiZXhwIjoxNjMyMTMwMTUzfQ.PFxuNAGcqYE88FPe56e6Qgk8Qw39v0sURhzh79d0iZQ",
+            token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
           },
         });
         SetNewUsers(res.data);
@@ -39,9 +38,6 @@ function WidgetSm() {
               className="widgetSmImg"
             />
             <div className="widgetSmUser">
-              <span className="widgetSmUsername">{user.username}</span>
-            </div>
-            <div className="widgetSmUser">
               <span className="widgetSmUsername">{user.email}</span>
             </div>
             <div className="widgetSmUser">
@@ -52,7 +48,7 @@ function WidgetSm() {
             <Link to="/users/" className="link">
               <button className="widgetSmButton">
                 <Visibility className="widgetSmIcon" />
-                Display
+                More info view
               </button>
             </Link>
           </li>
