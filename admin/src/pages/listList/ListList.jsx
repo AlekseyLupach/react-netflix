@@ -50,7 +50,8 @@ function ListList() {
         rows={lists}
         disableSelectionOnClick
         columns={columns}
-        pageSize={8}
+        rowsPerPageOptions={[10, 20]}
+        pageSize={10}
         checkboxSelection
         getRowId={(r) => r._id}
       />

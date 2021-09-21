@@ -16,7 +16,6 @@ function List({ list }) {
     setIsMoved(true);
     let distance = listRef.current.getBoundingClientRect().x - 50;
     if (direction === "left" && slideNumber > 0) {
-      console.log(slideNumber);
       setSlideNumber(slideNumber - 1);
       listRef.current.style.transform = `translateX(${230 + distance}px)`;
     }

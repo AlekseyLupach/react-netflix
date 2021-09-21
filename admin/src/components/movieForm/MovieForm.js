@@ -58,17 +58,32 @@ function MovieForm({ setValue, value, pageTitle, handleSubmit, movie }) {
       <form className="addProductForm">
         <div className="addProductItem">
           <label>Background Image</label>
-          <div>
-            {/* <img
-              src={img ? URL.createObjectURL(img) : movie.img}
+          <div className="addProductImg">
+            <img
+              src={
+                img
+                  ? URL.createObjectURL(img)
+                  : "https://icon-library.com/images/unknown-icon.png"
+              }
               alt=""
               className="productUploadImg"
-            /> */}
+            />
           </div>
           <input type="file" id="img" name="img" onChange={handleImg} />
         </div>
         <div className="addProductItem">
           <label>Title image</label>
+          <div className="addProductImg">
+            <img
+              src={
+                imgTitle
+                  ? URL.createObjectURL(imgTitle)
+                  : "https://icon-library.com/images/unknown-icon.png"
+              }
+              alt=""
+              className="productUploadImg"
+            />
+          </div>
           <input
             type="file"
             id="imgTitle"
@@ -78,15 +93,40 @@ function MovieForm({ setValue, value, pageTitle, handleSubmit, movie }) {
         </div>
         <div className="addProductItem">
           <label>List image</label>
+          <div className="addProductImg">
+            <img
+              src={
+                imgList
+                  ? URL.createObjectURL(imgList)
+                  : "https://icon-library.com/images/unknown-icon.png"
+              }
+              alt=""
+              className="productUploadImg"
+            />
+          </div>
           <input
             type="file"
-            id="setImgBg"
-            name="setImgBg"
+            id="imgList"
+            name="imgList"
             onChange={handleImgList}
           />
         </div>
         <div className="addProductItem">
           <label>Trailer</label>
+          <div className="addProductImg">
+            {trailer ? (
+              <video
+                src={URL.createObjectURL(trailer)}
+                alt=""
+                className="productUploadImg"
+              />
+            ) : (
+              <img
+                src="https://icon-library.com/images/unknown-icon.png"
+                alt="text"
+              />
+            )}
+          </div>
           <input
             type="file"
             name="trailer"

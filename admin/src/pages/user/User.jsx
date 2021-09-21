@@ -1,9 +1,10 @@
 import "./user.css";
-import { CalendarToday, PermIdentity, Publish } from "@material-ui/icons";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { CalendarToday, PermIdentity } from "@material-ui/icons";
+import { useLocation, useHistory } from "react-router-dom";
 import { useState, useContext } from "react";
 import { UserContext } from "../../context/userContext/UserContext";
 import { updateUser } from "../../context/userContext/apiCalls";
+import UserForm from "../../components/userForm/userForm";
 
 function User() {
   const [update, setUpdate] = useState(null);
@@ -25,12 +26,6 @@ function User() {
 
   return (
     <div className="user">
-      <div className="userTitleContainer">
-        <h1 className="userTitle">Edit User</h1>
-        <Link to="/newUser">
-          <button className="userAddButton">Create</button>
-        </Link>
-      </div>
       <div className="userContainer">
         <div className="userShow">
           <div className="userShowTop">
@@ -59,63 +54,12 @@ function User() {
             </div>
           </div>
         </div>
-        <div className="userUpdate">
-          <span className="userUpdateTitle">Edit</span>
-          <form className="userUpdateForm">
-            <div className="userUpdateLeft">
-              <div className="userUpdateItem">
-                <label>Username</label>
-                <input
-                  type="text"
-                  placeholder={user.username}
-                  className="userUpdateInput"
-                  name="username"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Email</label>
-                <input
-                  type="text"
-                  placeholder={user.email}
-                  className="userUpdateInput"
-                  name="email"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Password</label>
-                <input
-                  type="password"
-                  placeholder="********"
-                  className="userUpdateInput"
-                  name="password"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className="userUpdateRight">
-              <div className="userUpdateUpload">
-                <img
-                  className="userUpdateImg"
-                  src={
-                    user.img ||
-                    "https://pbs.twimg.com/media/D8tCa48VsAA4lxn.jpg"
-                  }
-                  alt=""
-                />
-                <label htmlFor="file">
-                  <Publish className="userUpdateIcon" />
-                </label>
-                <input type="file" id="file" style={{ display: "none" }} />
-              </div>
-              <button className="userUpdateButton" onClick={handleSubmit}>
-                Update
-              </button>
-            </div>
-          </form>
-        </div>
       </div>
+      <UserForm
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        user={user}
+      />
     </div>
   );
 }

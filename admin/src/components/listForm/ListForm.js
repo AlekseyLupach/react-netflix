@@ -23,7 +23,6 @@ function ListForm({
               placeholder={list ? list.title : "List title"}
               name="title"
               onChange={handleChange}
-              value={list ? list.title : ""}
             />
           </div>
           <div className="addProductItem">
@@ -46,7 +45,7 @@ function ListForm({
           </div>
         </div>
         <div className="formRight">
-          <div className="addProductItem">
+          <div className="addProductItem content">
             <label>Content</label>
             <select
               multiple
@@ -62,9 +61,11 @@ function ListForm({
             </select>
           </div>
         </div>
-        <button className="submitButton" onClick={handleSubmit}>
-          {list ? "Update" : "Create"}
-        </button>
+        <div className="formButton">
+          <button className="submitButton" onClick={handleSubmit}>
+            {list ? "Update" : "Create"}
+          </button>
+        </div>
       </form>
     </div>
   );

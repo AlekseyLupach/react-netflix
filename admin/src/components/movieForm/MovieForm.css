@@ -1,11 +1,13 @@
 .newProduct {
-    flex: 4;
+    flex   : 4;
+    padding: 20px;
 }
 
 .addProductForm {
-    margin-top: 10px;
-    display   : flex;
-    flex-wrap : wrap;
+    margin-top : 10px;
+    display    : flex;
+    flex-wrap  : wrap;
+    align-items: center;
 }
 
 .addProductItem {
@@ -14,6 +16,22 @@
     flex-direction: column;
     margin-bottom : 10px;
     padding       : 30px;
+}
+
+.addProductImg {
+    width          : 180px;
+    height         : 180px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+}
+
+.addProductImg img {
+    max-width: 180px;
+}
+
+.addProductImg video {
+    max-width: 180px;
 }
 
 .addProductItem>label {
@@ -26,22 +44,23 @@
     padding: 10px;
 }
 
+.addProductItem>input[type=file] {
+    padding: 0;
+}
+
 .addProductItem>select {
     padding: 10px;
 }
 
 .addProductButton {
-    margin-top      : 10px;
-    padding         : 7px 10px;
+    margin-top      : 20px;
+    padding         : 9px 10px;
     border          : none;
     border-radius   : 10px;
-    background-color: darkblue;
+    background-color: #3bb077;
     color           : white;
     font-weight     : 600;
     cursor          : pointer;
-    height          : 40px;
-    width           : 100px;
-    align-self      : center;
+    font-size       : 18px;
     text-transform  : uppercase;
-
 }

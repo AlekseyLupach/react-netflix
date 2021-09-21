@@ -3,7 +3,7 @@ import MovieForm from "../../components/movieForm/MovieForm";
 import { createMovie } from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
 
-function NewProduct() {
+function NewMovie() {
   const [movie, setMovie] = useState(null);
   const { dispatch } = useContext(MovieContext);
 
@@ -22,4 +22,4 @@ function NewProduct() {
   );
 }
 
-export default NewProduct;
+export default NewMovie;

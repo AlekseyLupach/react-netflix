@@ -1,9 +1,23 @@
 import "./home.css";
 import axios from "axios";
-import { MONTHS } from "../../const";
 import { useEffect, useState } from "react";
 import Chart from "../../components/chart/Chart";
 import WidgetSm from "../../components/widgetSm/WidgetSm";
+
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Agu",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
 function Home() {
   const [userStats, setUserStats] = useState([]);

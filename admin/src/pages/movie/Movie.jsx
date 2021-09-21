@@ -4,7 +4,7 @@ import MovieForm from "../../components/movieForm/MovieForm";
 import { updateMovie } from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
 
-function Product() {
+function Movie() {
   const [update, setUpdate] = useState(null);
   const history = useHistory();
   const location = useLocation();
@@ -23,9 +23,9 @@ function Product() {
       value={update}
       setValue={setUpdate}
       handleSubmit={handleSubmit}
-      pageTitle={"Create Movie"}
+      pageTitle={"Update Movie"}
     />
   );
 }
 
-export default Product;
+export default Movie;

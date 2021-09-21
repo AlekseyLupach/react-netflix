@@ -6,3 +6,7 @@
     text-decoration: none;
     color: inherit;
 }
+
+.makeStyles-input-3, .makeStyles-caption-2[id] {
+    display: none !important;
+}

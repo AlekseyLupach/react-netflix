@@ -1,11 +1,5 @@
 import "./sidebar.css";
-import {
-  Home,
-  PermIdentity,
-  List,
-  AddCircleOutline,
-  PlayCircleOutline,
-} from "@material-ui/icons";
+import { Home, PermIdentity, List, AddCircleOutline, PlayCircleOutline } from "@material-ui/icons";
 import SidebarMenu from "../sidebarMenu/sidebarMenu";
 
 function Sidebar() {
@@ -33,7 +27,7 @@ function Sidebar() {
             {
               id: "4",
               name: "Create Movie",
-              link: "/newproduct",
+              link: "/newMovie",
               icons: <AddCircleOutline />,
             },
             {
@@ -46,7 +40,7 @@ function Sidebar() {
             {
               id: "6",
               name: "Create List",
-              link: "/newlist",
+              link: "/newList",
               icons: <AddCircleOutline />,
             },
           ]}

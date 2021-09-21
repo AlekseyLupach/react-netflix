@@ -1,4 +1,4 @@
-.newProduct {
+.product {
     flex   : 4;
     padding: 20px;
 }
@@ -10,11 +10,11 @@
 }
 
 .addProductItem {
-    width         : 400px;
+    width         : 300px;
     display       : flex;
     flex-direction: column;
     margin-bottom : 10px;
-    padding       : 20px;
+    padding       : 0px;
 }
 
 .addProductItem>label {
@@ -31,6 +31,14 @@
     padding: 10px;
 }
 
+.formButton {
+    display        : flex;
+    align-items    : flex-end;
+    justify-content: flex-end;
+    padding        : 20px;
+    margin-bottom  : 10px;
+}
+
 .submitButton {
     margin-top      : 10px;
     padding         : 7px 10px;
@@ -40,9 +48,6 @@
     color           : white;
     font-weight     : 600;
     cursor          : pointer;
-    align-self      : center;
-    align-items     : center;
-    display         : flex;
     font-size       : 18px;
     text-transform  : uppercase;
 }

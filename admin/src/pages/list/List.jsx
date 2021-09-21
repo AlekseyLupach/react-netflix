@@ -1,10 +1,10 @@
-import { useLocation, useHistory } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
-import { ListContext } from "../../context/listContext/ListContext";
+import { useLocation, useHistory } from "react-router-dom";
 import { updateList } from "../../context/listContext/apiCalls";
 import { getMovies } from "../../context/movieContext/apiCalls";
+import ListForm from "../../components/listForm/ListForm";
+import { ListContext } from "../../context/listContext/ListContext";
 import { MovieContext } from "../../context/movieContext/MovieContext";
-import "./list.css";
 
 function List() {
   const [update, setUpdate] = useState(null);
@@ -33,58 +33,16 @@ function List() {
     updateList(list._id, update, dispatch);
     history.push("/lists");
   };
+
   return (
-    <div className="product">
-      <div className="productTitleContainer">
-        <h1 className="productTitle">Update list</h1>
-      </div>
-      <div className="productBottom">
-        <form className="productForm">
-          <div className="productFormLeft">
-            <label>List Title</label>
-            <input
-              type="text"
-              placeholder={list.title}
-              name="title"
-              onChange={handleChange}
-            />
-            <label>Genre</label>
-            <input
-              type="text"
-              placeholder={list.genre}
-              name="genre"
-              onChange={handleChange}
-            />
-             <label>Type</label>
-            <select name="type" onChange={handleChange}>
-              <option>Type</option>
-              <option value="movie">Movie</option>
-              <option value="series">Series</option>
-            </select>
-          </div>
-          <div className="addProductItem">
-            <label>Content</label>
-            <select
-              multiple
-              name="content"
-              onChange={handleSelect}
-              style={{ height: "280px" }}
-            >
-              {movies.map((movie) => (
-                <option value={movie._id} key={movie._id}>
-                  {movie.title}, ({movie.genre})
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="productFormRight">
-            <button className="productButton" onClick={handleSubmit}>
-              Save update
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <ListForm
+      list={list}
+      movies={movies}
+      handleSubmit={handleSubmit}
+      handleSelect={handleSelect}
+      handleChange={handleChange}
+      pageTitle={"Update list"}
+    />
   );
 }
 
