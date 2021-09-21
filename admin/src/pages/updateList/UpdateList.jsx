@@ -1,15 +1,16 @@
-import { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { useLocation, useHistory } from "react-router-dom";
+import { updateList } from "../../context/listContext/apiCalls";
 import { getMovies } from "../../context/movieContext/apiCalls";
-import { MovieContext } from "../../context/movieContext/MovieContext";
-import { ListContext } from "../../context/listContext/ListContext";
-import { createList } from "../../context/listContext/apiCalls";
 import ListForm from "../../components/listForm/ListForm";
+import { ListContext } from "../../context/listContext/ListContext";
+import { MovieContext } from "../../context/movieContext/MovieContext";
 
-function NewList() {
-  const [list, setList] = useState(null);
+function UpdateList() {
+  const [update, setUpdate] = useState(null);
   const history = useHistory();
-
+  const location = useLocation();
+  const list = location.list;
   const { dispatch } = useContext(ListContext);
   const { movies, dispatch: dispatchMovie } = useContext(MovieContext);
 
@@ -19,29 +20,30 @@ function NewList() {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setList({ ...list, [e.target.name]: value });
+    setUpdate({ ...update, [e.target.name]: value });
   };
 
   const handleSelect = (e) => {
     let value = Array.from(e.target.selectedOptions, (option) => option.value);
-    setList({ ...list, [e.target.name]: value });
+    setUpdate({ ...list, [e.target.name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createList(list, dispatch);
+    updateList(list._id, update, dispatch);
     history.push("/lists");
   };
 
   return (
     <ListForm
+      list={list}
       movies={movies}
       handleSubmit={handleSubmit}
       handleSelect={handleSelect}
       handleChange={handleChange}
-      pageTitle={"New List"}
+      pageTitle={"Update list"}
     />
   );
 }
 
-export default NewList;
+export default UpdateList;

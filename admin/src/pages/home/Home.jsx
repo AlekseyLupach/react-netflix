@@ -1,28 +1,11 @@
-import Chart from "../../components/chart/Chart";
 import "./home.css";
-import WidgetSm from "../../components/widgetSm/WidgetSm";
-import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import { MONTHS } from "../../const";
+import { useEffect, useState } from "react";
+import Chart from "../../components/chart/Chart";
+import WidgetSm from "../../components/widgetSm/WidgetSm";
 
 function Home() {
-  const MONTHS = useMemo(
-    () => [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Agu",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    []
-  );
-
   const [userStats, setUserStats] = useState([]);
 
   useEffect(() => {
@@ -30,7 +13,8 @@ function Home() {
       try {
         const res = await axios.get("/users/stats", {
           headers: {
-            token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
           },
         });
         const statsList = res.data.sort(function (a, b) {
@@ -47,15 +31,13 @@ function Home() {
       }
     };
     getStats();
-  }, [MONTHS]);
+  }, []);
 
   return (
     <div className="home">
-      {/* <FeaturedInfo /> */}
-      <Chart data={userStats} title="User Analytics" grid dataKey="New User"/>
+      <Chart data={userStats} title="User Analytics" grid dataKey="New User" />
       <div className="homeWidgets">
-          <WidgetSm />
-          {/* <WidgetLg /> */}
+        <WidgetSm />
       </div>
     </div>
   );

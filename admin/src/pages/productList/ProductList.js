@@ -8,14 +8,13 @@ import { deleteMovies, getMovies } from "../../context/movieContext/apiCalls";
 
 function ProductList() {
   const { movies, dispatch } = useContext(MovieContext);
-  
+
   useEffect(() => {
     getMovies(dispatch);
   }, [dispatch]);
 
   const handleDelete = (id) => {
     deleteMovies(id, dispatch);
-    // setData(data.filter((item) => item.id !== id));
   };
 
   const columns = [
