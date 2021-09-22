@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const MovieSchema = new mongoose.Schema(
+const FavoritSchema = new mongoose.Schema(
   {
     title: { type: String, required: true, unique: true },
     desc: { type: String },
@@ -19,4 +19,4 @@ const MovieSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Movie", MovieSchema);
+module.exports = mongoose.model("Favorit", FavoritSchema);

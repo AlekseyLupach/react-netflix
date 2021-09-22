@@ -48,17 +48,17 @@ function Featured({ type, setGenre }) {
         <div className="infoContainer">
           <h2 className="title">{content.title}</h2>
           <span className="year">{content.year}</span>
-          <span role="presentation" class="info-spacer">
+          <span role="presentation" className="info-spacer">
             {" "}
             |{" "}
           </span>
           <span className="limit">{content.limit}+</span>
-          <span role="presentation" class="info-spacer">
+          <span role="presentation" className="info-spacer">
             {" "}
             |{" "}
           </span>
           <span className="duration">{content.duration}</span>
-          <span role="presentation" class="info-spacer">
+          <span role="presentation" className="info-spacer">
             {" "}
             |{" "}
           </span>

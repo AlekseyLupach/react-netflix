@@ -8,7 +8,7 @@ import { logout } from "../../authContext/AuthActions";
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const { user, dispatch } = useContext(AuthContext);
-  console.log(user);
+
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
@@ -31,11 +31,11 @@ function Navbar() {
           <Link to="/movies" className="link">
             <span className="navbarmainLinks">Movies</span>
           </Link>
-          <Link className="link">
+          <Link to="/" className="link">
             <span>New and Popular</span>
           </Link>
-          <Link className="link">
-            <span>List</span>
+          <Link to="my-list" className="link">
+            <span>My List</span>
           </Link>
         </div>
         <div className="right">

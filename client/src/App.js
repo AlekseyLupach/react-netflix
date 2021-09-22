@@ -11,6 +11,7 @@ import Watch from "./pages/watch/Watch";
 import Register from "./pages/register/Register";
 import { useContext } from "react";
 import { AuthContext } from "./authContext/AuthContext";
+import MyList from "./pages/my-list/MyList";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -37,6 +38,9 @@ function App() {
             </Route>
             <Route path="/watch">
               <Watch />
+            </Route>
+            <Route path="/my-list">
+              <MyList />
             </Route>
           </>
         )}

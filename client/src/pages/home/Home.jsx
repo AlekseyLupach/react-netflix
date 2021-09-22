@@ -29,13 +29,12 @@ function Home({ type }) {
     };
     getRandomLists();
   }, [type, genre]);
-
   return (
     <div className="home">
       <Navbar />
       <Featured type={type} setGenre={setGenre}/>
       {lists.map((list) => (
-        <List list={list} />
+        <List key={list._id} list={list} />
       ))}
     </div>
   );
