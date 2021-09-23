@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./MyList.scss";
 import axios from "axios";
 import Navbar from "../../components/navbar/Navbar";
 import ListItem from "../../components/listItem/ListItem";
 
-function MyList() {
+function MyList({ user }) {
   const [favorite, setFavorite] = useState([]);
-  const getFavorite = async () => {
+
+  const getFavorite = useCallback(async () => {
+    let data = [];
     try {
       const res = await axios.get("/favorit/", {
         headers: {
@@ -14,14 +16,21 @@ function MyList() {
             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
         },
       });
-      setFavorite(res.data);
+      res.data.filter((item) =>
+        user._id === item.userId ? data.push(item) : setFavorite([])
+      );
+      setFavorite(data);
     } catch (err) {
       console.log(err);
     }
-  };
+  }, [user._id]);
+
   useEffect(() => {
     getFavorite();
-  }, []);
+    return () => {
+      setFavorite([]);
+    };
+  }, [getFavorite]);
 
   return (
     <div className="MyList">
@@ -36,6 +45,9 @@ function MyList() {
                 index={i}
                 item={item._id}
                 getFavorite={getFavorite}
+                setFavorite={setFavorite}
+                favorite={favorite}
+                user={user}
               />
             ))}
           </div>

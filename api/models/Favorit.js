@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const FavoritSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true, unique: true },
+    title: { type: String },
     desc: { type: String },
     img: { type: String },
     imgTitle: { type: String },
@@ -15,6 +15,7 @@ const FavoritSchema = new mongoose.Schema(
     duration: { type: String },
     isSeries: { type: Boolean, default: false },
     favorite: { type: Boolean, default: false },
+    userId: { type: String },
   },
   { timestamps: true }
 );

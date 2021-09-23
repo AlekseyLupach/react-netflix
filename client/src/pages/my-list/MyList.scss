@@ -5,14 +5,14 @@
 
   .favorite {
     width: 100%;
-    padding-top: 100px;
+    padding-top: 150px;
 
     .favoriteTitle {
       color: white;
       font-size: 24px;
       font-weight: 500;
       margin-left: 50px;
-      margin-bottom: 50px;
+      margin-bottom: 20px;
     }
 
     .wrapper {
@@ -40,8 +40,9 @@
       .container {
         margin-left: 50px;
         display: flex;
-        flex-wrap: wrap;
         margin-top: 10px;
+        width: max-content;
+        transform: translateX(0px);
         transition: all 0.5s ease;
       }
     }

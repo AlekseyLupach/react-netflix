@@ -5,7 +5,7 @@ import "./home.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function Home({ type }) {
+function Home({ type, user }) {
   const [lists, setLists] = useState([]);
   const [genre, setGenre] = useState(null);
 
@@ -29,12 +29,13 @@ function Home({ type }) {
     };
     getRandomLists();
   }, [type, genre]);
+
   return (
     <div className="home">
       <Navbar />
       <Featured type={type} setGenre={setGenre}/>
       {lists.map((list) => (
-        <List key={list._id} list={list} />
+        <List key={list._id} list={list} listContent={list.content} user={user}/>
       ))}
     </div>
   );

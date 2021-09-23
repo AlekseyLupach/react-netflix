@@ -20,7 +20,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/">
-          {user ? <Home /> : <Redirect to="/register" />}
+          {user ? <Home user={user} /> : <Redirect to="/register" />}
         </Route>
         <Route path="/register">
           {!user ? <Register /> : <Redirect to="/" />}
@@ -29,20 +29,20 @@ function App() {
           <Login />
         </Route>
         {user && (
-          <>
+          <Switch>
             <Route path="/movies">
-              <Home type="movie" />
+              <Home type="movie" user={user} />
             </Route>
             <Route path="/series">
-              <Home type="series" />
+              <Home type="series" user={user} />
             </Route>
             <Route path="/watch">
               <Watch />
             </Route>
             <Route path="/my-list">
-              <MyList />
+              <MyList user={user} />
             </Route>
-          </>
+          </Switch>
         )}
       </Switch>
     </Router>
