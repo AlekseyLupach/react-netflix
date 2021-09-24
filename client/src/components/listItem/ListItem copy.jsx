@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { loginSuccess } from "../../authContext/AuthActions";
 import { AuthContext } from "../../authContext/AuthContext";
 
-function ListItem({ index, item, user }) {
+function ListItem({ index, item, getFavorite, favorite, user }) {
   const [isHovered, setIsHovered] = useState(false);
   const [movie, setMovie] = useState({});
   const { dispatch } = useContext(AuthContext);
@@ -39,7 +39,7 @@ function ListItem({ index, item, user }) {
   }, [getMovie]);
 
   const findFavorit = () => {
-    if (user.favorite.find((item) => item === movie._id)) {
+    if (favorite.find((item) => item._id === movie._id)) {
       return true;
     }
     return false;
@@ -47,19 +47,19 @@ function ListItem({ index, item, user }) {
 
   const handleFavorit = () => {
     const newMovie = {
-      accessToken: JSON.parse(localStorage.getItem("user")).accessToken,
-      favorite: [...user.favorite, movie._id],
+      ...movie,
+      userId: user._id,
     };
     const createFavoritLists = async () => {
       try {
-        const res = await axios.put("/users/" + user._id, newMovie, {
+        await axios.post("/favorit/", newMovie, {
           headers: {
             token:
               "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
           },
         });
-        dispatch(loginSuccess(res.data));
         await getMovie();
+        await getFavorite();
       } catch (err) {
         console.log(err);
       }
@@ -67,19 +67,16 @@ function ListItem({ index, item, user }) {
     createFavoritLists();
   };
 
-  const handleDelete = async () => {
-    const newMovie = {
-      accessToken: JSON.parse(localStorage.getItem("user")).accessToken,
-      favorite: user.favorite.filter((fav) => fav !== movie._id),
-    };
+  const handleDelete = async (id) => {
     try {
-      const res = await axios.put("/users/" + user._id, newMovie, {
+      await axios.delete("/favorit/" + id, {
         headers: {
           token:
             "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
         },
       });
-      dispatch(loginSuccess(res.data));
+      await getMovie();
+      await getFavorite();
     } catch (err) {
       console.log(err);
     }

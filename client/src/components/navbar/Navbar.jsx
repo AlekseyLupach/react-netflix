@@ -61,8 +61,12 @@ function Navbar() {
               ) : (
                 ""
               )}
-              <span>Settings</span>
-              <span onClick={() => dispatch(logout())}>Logout</span>
+              <Link to="/" className="link">
+                <span>Settings</span>
+              </Link>
+              <Link to="login" className="link">
+                <span onClick={() => dispatch(logout())}>Logout</span>
+              </Link>
             </div>
           </div>
         </div>
