@@ -1,21 +1,24 @@
 import "./listItem.scss";
 import {
+  addInMyList,
+  deleteInMyList,
+} from "../../context/authContext/apiCalls";
+import {
   PlayArrow,
   Add,
   ThumbUpAltOutlined,
   ThumbDownOutlined,
   DeleteOutline,
 } from "@material-ui/icons";
-import { useEffect, useState, useCallback, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { loginSuccess } from "../../authContext/AuthActions";
-import { AuthContext } from "../../authContext/AuthContext";
+import { useEffect, useState, useContext, useCallback } from "react";
+import { AuthContext } from "../../context/authContext/AuthContext";
 
 function ListItem({ index, item, user }) {
   const [isHovered, setIsHovered] = useState(false);
-  const [movie, setMovie] = useState({});
   const { dispatch } = useContext(AuthContext);
+  const [movie, setMovie] = useState();
 
   const getMovie = useCallback(async () => {
     try {
@@ -33,38 +36,14 @@ function ListItem({ index, item, user }) {
 
   useEffect(() => {
     getMovie();
-    return () => {
-      setMovie({});
-    };
   }, [getMovie]);
 
-  const findFavorit = () => {
-    if (user.favorite.find((item) => item === movie._id)) {
-      return true;
-    }
-    return false;
-  };
-
-  const handleFavorit = () => {
+  const handleFavorit = async () => {
     const newMovie = {
       accessToken: JSON.parse(localStorage.getItem("user")).accessToken,
       favorite: [...user.favorite, movie._id],
     };
-    const createFavoritLists = async () => {
-      try {
-        const res = await axios.put("/users/" + user._id, newMovie, {
-          headers: {
-            token:
-              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-          },
-        });
-        dispatch(loginSuccess(res.data));
-        await getMovie();
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    createFavoritLists();
+    addInMyList(user, newMovie, dispatch);
   };
 
   const handleDelete = async () => {
@@ -72,17 +51,7 @@ function ListItem({ index, item, user }) {
       accessToken: JSON.parse(localStorage.getItem("user")).accessToken,
       favorite: user.favorite.filter((fav) => fav !== movie._id),
     };
-    try {
-      const res = await axios.put("/users/" + user._id, newMovie, {
-        headers: {
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
-      dispatch(loginSuccess(res.data));
-    } catch (err) {
-      console.log(err);
-    }
+    deleteInMyList(user, newMovie, dispatch);
   };
 
   return (
@@ -101,7 +70,7 @@ function ListItem({ index, item, user }) {
               <Link to={{ pathname: "/watch", movie: movie }}>
                 <PlayArrow className="icon link" />
               </Link>
-              {findFavorit() === true ? (
+              {user.favorite.find((item) => item === movie._id) ? (
                 <DeleteOutline
                   className="icon"
                   onClick={() => handleDelete(movie._id)}

@@ -1,7 +1,7 @@
+import "./register.scss";
 import axios from "axios";
 import { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import "./register.scss";
 
 function Register() {
   const [email, setEmail] = useState("");

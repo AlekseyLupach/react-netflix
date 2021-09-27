@@ -1,5 +1,5 @@
-import React from "react";
 import "./MyList.scss";
+import React from "react";
 import Navbar from "../../components/navbar/Navbar";
 import ListItem from "../../components/listItem/ListItem";
 

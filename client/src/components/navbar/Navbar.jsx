@@ -2,8 +2,8 @@ import "./navbar.scss";
 import { ArrowDropDown, Notifications, Search } from "@material-ui/icons";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../authContext/AuthContext";
-import { logout } from "../../authContext/AuthActions";
+import { AuthContext } from "../../context/authContext/AuthContext";
+import { logout } from "../../context/authContext/AuthActions";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);

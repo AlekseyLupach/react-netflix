@@ -1,8 +1,8 @@
-import { useState, useContext } from "react";
-import { login } from "../../authContext/apiCalls";
-import { AuthContext } from "../../authContext/AuthContext";
-import { useHistory } from "react-router-dom";
 import "./login.scss";
+import { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { login } from "../../context/authContext/apiCalls";
+import { AuthContext } from "../../context/authContext/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");

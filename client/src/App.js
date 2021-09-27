@@ -5,13 +5,13 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
-import Watch from "./pages/watch/Watch";
-import Register from "./pages/register/Register";
 import { useContext } from "react";
-import { AuthContext } from "./authContext/AuthContext";
+import Home from "./pages/home/Home";
+import Watch from "./pages/watch/Watch";
+import Login from "./pages/login/Login";
 import MyList from "./pages/my-list/MyList";
+import Register from "./pages/register/Register";
+import { AuthContext } from "./context/authContext/AuthContext";
 
 function App() {
   const { user } = useContext(AuthContext);

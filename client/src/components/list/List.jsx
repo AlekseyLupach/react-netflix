@@ -5,6 +5,7 @@ import {
 } from "@material-ui/icons";
 import { useRef, useState } from "react";
 import ListItem from "../listItem/ListItem";
+
 function List({ list, user }) {
   const [isMoved, setIsMoved] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);

@@ -1,27 +1,15 @@
 import "./featured.scss";
+import { useEffect, useContext } from "react";
 import { InfoOutlined, PlayArrow } from "@material-ui/icons";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { getRandomContent } from "../../context/contentContext/apiCalls";
+import { ContentContext } from "../../context/contentContext/ContentContext";
 
 function Featured({ type, setGenre }) {
-  const [content, setContent] = useState({});
+  const { content, dispatch } = useContext(ContentContext);
 
   useEffect(() => {
-    const getRandomContent = async () => {
-      try {
-        const res = await axios.get(`/movies/random?type=${type}`, {
-          headers: {
-            token:
-              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-          },
-        });
-        setContent(res.data[0]);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getRandomContent();
-  }, [type]);
+    getRandomContent(type, dispatch);
+  }, [type, dispatch]);
 
   return (
     <div className="featured">
