@@ -11,32 +11,37 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addInMyList, deleteInMyList } from "../../redux/apiCalls";
+import { storageGetItem } from "../../const";
 
 function ListItem({ index, item, user }) {
   const [isHovered, setIsHovered] = useState(false);
   const dispatch = useDispatch();
-  const [movie, setMovie] = useState();
+  const [movie, setMovie] = useState(null);
 
   useEffect(() => {
+    let cleanupFunction = false;
     const getMovie = async () => {
       try {
         const res = await axios.get("/movies/find/" + item, {
           headers: {
             token:
-              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+              "Bearer " + storageGetItem.accessToken,
           },
         });
-        setMovie(res.data);
+        if (!cleanupFunction) setMovie(res.data);
       } catch (err) {
         console.log(err);
       }
     };
+
     getMovie();
+
+    return () => (cleanupFunction = true);
   }, [item]);
 
   const handleFavorit = async () => {
     const newMovie = {
-      accessToken: JSON.parse(localStorage.getItem("user")).accessToken,
+      accessToken: storageGetItem.accessToken,
       favorite: [...user.favorite, movie._id],
     };
     addInMyList(user, newMovie, dispatch);
@@ -44,7 +49,7 @@ function ListItem({ index, item, user }) {
 
   const handleDelete = async () => {
     const newMovie = {
-      accessToken: JSON.parse(localStorage.getItem("user")).accessToken,
+      accessToken: storageGetItem.accessToken,
       favorite: user.favorite.filter((fav) => fav !== movie._id),
     };
     deleteInMyList(user, newMovie, dispatch);

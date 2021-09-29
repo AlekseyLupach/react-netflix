@@ -5,19 +5,15 @@ import Navbar from "../../components/navbar/Navbar";
 import { getRandomLists } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import Featured from "../../components/featured/Featured";
-import { useIsMounted } from "../../useIsMounted";
 
 function Home({ type }) {
   const [genre, setGenre] = useState(null);
   const dispatch = useDispatch();
   const { lists } = useSelector((state) => state.lists);
-  const isMounted = useIsMounted();
 
   useEffect(() => {
-    if (isMounted.current) {
-      getRandomLists(type, genre, dispatch);
-    }
-  }, [type, genre, isMounted, dispatch]);
+    getRandomLists(type, genre, dispatch);
+  }, [type, genre, dispatch]);
 
   return (
     <div className="home">

@@ -12,6 +12,7 @@ import {
 } from "./userSlice";
 import { contentStart, contentSuccess, contentFailure } from "./contentSlice";
 import { listsStart, listsSuccess, listsFailure } from "./listsSlice";
+import { storageGetItem } from "../const";
 
 export const login = async (user, dispatch) => {
   dispatch(loginStart());
@@ -29,7 +30,7 @@ export const getRandomContent = async (type, dispatch) => {
   try {
     const res = await axios.get(`/movies/random?type=${type}`, {
       headers: {
-        token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        token: "Bearer " + storageGetItem.accessToken,
       },
     });
     dispatch(contentSuccess(res.data[0]));
@@ -43,7 +44,7 @@ export const addInMyList = async (user, id, dispatch) => {
   try {
     const res = await axios.put("/users/" + user._id, id, {
       headers: {
-        token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        token: "Bearer " + storageGetItem.accessToken,
       },
     });
     dispatch(addInMyListSuccess(res.data));
@@ -57,7 +58,7 @@ export const deleteInMyList = async (user, newMovieID, dispatch) => {
   try {
     const res = await axios.put("/users/" + user._id, newMovieID, {
       headers: {
-        token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        token: "Bearer " + storageGetItem.accessToken,
       },
     });
     dispatch(deleteInMyListSuccess(res.data));
@@ -75,7 +76,7 @@ export const getRandomLists = async (type, genre, dispatch) => {
       {
         headers: {
           token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+            "Bearer " + storageGetItem.accessToken,
         },
       }
     );
