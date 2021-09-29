@@ -1,30 +1,30 @@
 import "./home.scss";
+import { useState, useEffect } from "react";
 import List from "../../components/list/List";
 import Navbar from "../../components/navbar/Navbar";
-import { useState, useEffect, useContext } from "react";
+import { getRandomLists } from "../../redux/apiCalls";
+import { useDispatch, useSelector } from "react-redux";
 import Featured from "../../components/featured/Featured";
-import { getRandomLists } from "../../context/listsContext/apiCalls";
-import { ListsContext } from "../../context/listsContext/ListsContext";
+import { useIsMounted } from "../../useIsMounted";
 
-function Home({ type, user }) {
+function Home({ type }) {
   const [genre, setGenre] = useState(null);
-  const { lists, dispatch } = useContext(ListsContext);
+  const dispatch = useDispatch();
+  const { lists } = useSelector((state) => state.lists);
+  const isMounted = useIsMounted();
 
   useEffect(() => {
-    getRandomLists(type, genre, dispatch);
-  }, [type, genre, dispatch]);
+    if (isMounted.current) {
+      getRandomLists(type, genre, dispatch);
+    }
+  }, [type, genre, isMounted, dispatch]);
 
   return (
     <div className="home">
       <Navbar />
       <Featured type={type} setGenre={setGenre} />
       {lists.map((list) => (
-        <List
-          key={list._id}
-          list={list}
-          listContent={list.content}
-          user={user}
-        />
+        <List key={list._id} list={list} listContent={list.content} />
       ))}
     </div>
   );

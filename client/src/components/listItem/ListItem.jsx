@@ -1,9 +1,5 @@
 import "./listItem.scss";
 import {
-  addInMyList,
-  deleteInMyList,
-} from "../../context/authContext/apiCalls";
-import {
   PlayArrow,
   Add,
   ThumbUpAltOutlined,
@@ -12,31 +8,31 @@ import {
 } from "@material-ui/icons";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useEffect, useState, useContext, useCallback } from "react";
-import { AuthContext } from "../../context/authContext/AuthContext";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addInMyList, deleteInMyList } from "../../redux/apiCalls";
 
 function ListItem({ index, item, user }) {
   const [isHovered, setIsHovered] = useState(false);
-  const { dispatch } = useContext(AuthContext);
+  const dispatch = useDispatch();
   const [movie, setMovie] = useState();
 
-  const getMovie = useCallback(async () => {
-    try {
-      const res = await axios.get("/movies/find/" + item, {
-        headers: {
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
-      setMovie(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  }, [item]);
-
   useEffect(() => {
+    const getMovie = async () => {
+      try {
+        const res = await axios.get("/movies/find/" + item, {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
+        setMovie(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     getMovie();
-  }, [getMovie]);
+  }, [item]);
 
   const handleFavorit = async () => {
     const newMovie = {

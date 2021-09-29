@@ -4,12 +4,14 @@ import {
   ArrowForwardIosOutlined,
 } from "@material-ui/icons";
 import { useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import ListItem from "../listItem/ListItem";
 
-function List({ list, user }) {
+function List({ list }) {
   const [isMoved, setIsMoved] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);
   const listRef = useRef();
+  const { user } = useSelector((state) => state.user);
 
   const handleClick = (direction) => {
     setIsMoved(true);
@@ -34,8 +36,8 @@ function List({ list, user }) {
           style={{ display: !isMoved && "none" }}
         />
         <div className="container" ref={listRef}>
-          {list.content.map((item, i) => (
-            <ListItem key={item} index={i} item={item} user={user} />
+          {list.content.map((item, index) => (
+            <ListItem key={item} index={index} item={item} user={user} />
           ))}
         </div>
         <ArrowForwardIosOutlined

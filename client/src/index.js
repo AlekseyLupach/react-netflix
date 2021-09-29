@@ -1,19 +1,14 @@
 import App from "./App";
 import React from "react";
 import ReactDOM from "react-dom";
-import { AuthContextProvider } from "./context/authContext/AuthContext";
-import { ListsContextProvider } from "./context/listsContext/ListsContext";
-import { ContentContextProvider } from "./context/contentContext/ContentContext";
+import store from "./redux/store";
+import { Provider } from "react-redux";
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <ListsContextProvider>
-        <ContentContextProvider>
-          <App />
-        </ContentContextProvider>
-      </ListsContextProvider>
-    </AuthContextProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

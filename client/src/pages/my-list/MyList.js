@@ -2,8 +2,11 @@ import "./MyList.scss";
 import React from "react";
 import Navbar from "../../components/navbar/Navbar";
 import ListItem from "../../components/listItem/ListItem";
+import { useSelector } from "react-redux";
 
-function MyList({ user }) {
+function MyList() {
+  const { user } = useSelector((state) => state.user);
+
   return (
     <div className="MyList">
       <Navbar />

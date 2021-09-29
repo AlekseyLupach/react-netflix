@@ -1,13 +1,13 @@
 import "./login.scss";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { login } from "../../context/authContext/apiCalls";
-import { AuthContext } from "../../context/authContext/AuthContext";
+import { login } from "../../redux/apiCalls";
+import { useDispatch } from "react-redux";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { dispatch } = useContext(AuthContext);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const handleLogin = (e) => {

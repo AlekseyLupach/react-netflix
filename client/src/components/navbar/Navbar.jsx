@@ -1,13 +1,14 @@
 import "./navbar.scss";
 import { ArrowDropDown, Notifications, Search } from "@material-ui/icons";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/authContext/AuthContext";
-import { logout } from "../../context/authContext/AuthActions";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/userSlice";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { user, dispatch } = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);

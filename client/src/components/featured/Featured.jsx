@@ -1,11 +1,12 @@
 import "./featured.scss";
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import { InfoOutlined, PlayArrow } from "@material-ui/icons";
-import { getRandomContent } from "../../context/contentContext/apiCalls";
-import { ContentContext } from "../../context/contentContext/ContentContext";
+import { getRandomContent } from "../../redux/apiCalls";
+import { useDispatch, useSelector } from "react-redux";
 
 function Featured({ type, setGenre }) {
-  const { content, dispatch } = useContext(ContentContext);
+  const dispatch = useDispatch();
+  const { content } = useSelector((state) => state.content);
 
   useEffect(() => {
     getRandomContent(type, dispatch);
